@@ -44,7 +44,7 @@ namespace Offers
             ConfigurationOptions option = new ConfigurationOptions
             {
                 AbortOnConnectFail = false,
-                EndPoints = { "cache:6379" }
+                EndPoints = { "cache:6379555555555555" }
             };
             var RedisConnection = ConnectionMultiplexer.Connect(option);
 
