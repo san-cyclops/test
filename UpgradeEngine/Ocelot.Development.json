@@ -1,0 +1,105 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/offers/v1/{everything}",
+       "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "offers",
+           "Port": 51169
+        }
+      ],
+      "UpstreamPathTemplate": "/offers/{everything}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post"
+      ],
+
+      "SwaggerKey": "Offers"
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "offers",
+          "Port": 51169
+        }
+      ],
+      "UpstreamPathTemplate": "/{everything}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post"
+      ],
+
+      "SwaggerKey": "Offers"
+    },
+    {
+      "DownstreamPathTemplate": "/test/v1/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 60026
+        }
+      ],
+      "UpstreamPathTemplate": "/test/{everything}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post"
+      ],
+      "SwaggerKey": "Test"
+    }
+    //,{
+    //  "DownstreamPathTemplate": "/offer/v1/{everything}",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 60027
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/offer/{everything}",
+    //  "UpstreamHttpMethod": [
+    //    "Get",
+    //    "Post"
+    //  ],
+    //  "SwaggerKey": "Ratings"
+    //}
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Offers",
+      "Config": [
+        {
+          "Name": "Offers API",
+          "Version": "v1",
+           "Url": "http://offers:51169/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    //{
+    //  "Key": "Test",
+    //  "Config": [
+    //    {
+    //      "Name": "Test Stub",
+    //      "Version": "v1",
+    //      "Url": "http://localhost:60026/swagger/v1/swagger.json"
+    //    }
+    //  ]
+    //}
+    //,{
+    //  "Key": "Ratings",
+    //  "Config": [
+    //    {
+    //      "Name": "Ratings API",
+    //      "Version": "v1",
+    //      "Url": "http://localhost:60027/swagger/v1/swagger.json"
+    //    }
+    //  ]
+    //}
+  ],
+  "GlobalConfiguration": {
+     "BaseUrl": "http://127.0.0.1"
+  }
+}

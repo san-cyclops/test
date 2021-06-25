@@ -1,0 +1,104 @@
+{
+	"AWSEBDockerrunVersion": 2,
+    "Authentication": {
+    "bucket": "artifact-set-pipeline-1-prageethpmplus",
+    "key": "config.json"
+    },
+	
+	"containerDefinitions": [{
+			"environment": [{
+				"name": "ASPNETCORE_ENVIRONMENT",
+				"value": "Development"
+			}],
+			"essential": true,
+			"memory": 128,
+			"image": "339035177641.dkr.ecr.ap-southeast-1.amazonaws.com/offers:latest",
+			"name": "offers",
+			"mountPoints": [
+				{
+				  "sourceVolume": "Logs",
+				  "containerPath": "/Logs"
+		
+				},
+				{
+				  "sourceVolume": "SystemLogs",
+				  "containerPath": "/SystemLogs"
+				}],
+
+			"links": [
+                "cache:cache"
+              ],
+			"portMappings": [{
+				"containerPort": 80
+			}]
+		},
+
+        {
+            "essential": true,
+            "image": "redis:6.2-alpine",
+            "name": "cache",
+            "memory": 128,
+			"mountPoints": [
+				{
+				  "sourceVolume": "Redis",
+				  "containerPath": "/data"
+				}],
+            "portMappings": [
+                {
+                    "containerPort": 6379,
+                    "hostPort": 6379
+                }
+            ]
+        },
+
+		{
+			"environment": [{
+					"name": "ASPNETCORE_ENVIRONMENT",
+					"value": "Development"
+				},
+				{
+					"name": "ASPNETCORE_URLS",
+					"value": "https://+:443;http://+:80"
+				}
+			],
+			"essential": true,
+			"memory": 128,
+			"image": "339035177641.dkr.ecr.ap-southeast-1.amazonaws.com/upgradeengine:latest",
+			"name": "upgradeengine",
+			"links": [
+                "offers:offers"
+              ],
+			"portMappings": [{
+					"containerPort": 80,
+					"hostPort": 80
+				},
+				{
+					"containerPort": 443,
+					"hostPort": 443
+				}
+			]
+		}
+	],
+	"family": "",
+	"volumes": [
+		{
+		  "name": "Redis",
+		  "host": {
+			"sourcePath": "/opt/project/UpgradeEngine/Redis"
+		  }
+		},
+		{
+		  "name": "SystemLogs",
+		  "host": {
+			"sourcePath": "/opt/project/UpgradeEngine/SystemLogs"
+		  }
+		},
+		{
+			"name": "Logs",
+			"host": {
+			  "sourcePath": "/opt/project/UpgradeEngine/Logs"
+			}
+		  }
+	  ]
+
+}
